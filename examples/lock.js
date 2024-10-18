@@ -24,7 +24,7 @@ async function doStuff() {
       const unlock = await lock.lock();
       await lock.disconnect();
       const newLockData = client.getLockData();
-      console.log(JSON.stringify(newLockData));
+      //console.log(JSON.stringify(newLockData));
       try {
         await fs.writeFile(settingsFile, Buffer.from(JSON.stringify(newLockData)));
       } catch (error) {
