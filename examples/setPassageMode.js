@@ -12,7 +12,7 @@ async function doStuff() {
   client.startScanLock();
   console.log("Scan started");
   client.on("foundLock", async (lock) => {
-    console.log(lock.toJSON());
+  //  console.log(lock.toJSON());
     console.log();
     
     if (lock.isInitialized() && lock.isPaired()) {
@@ -22,10 +22,10 @@ async function doStuff() {
       console.log();
       const result = await lock.setPassageMode({
         type: PassageModeType.WEEKLY,
-        weekOrDay: 5,
+        weekOrDay: 0,
         month: 0,
-        startHour: "0000",
-        endHour: "2359"
+        startHour: "0800",
+        endHour: "1800"
       });
       await lock.disconnect();
 
