@@ -1465,31 +1465,4 @@ export class TTLock extends TTLockApi implements TTLock {
       return data;
     }
   }
-
-  /** Just for debugging */
-  toJSON(asObject: boolean = false): string | Object {
-    let json: Object = this.device.toJSON(true);
-
-    if (this.featureList) Reflect.set(json, 'featureList', this.featureList);
-    if (this.switchState) Reflect.set(json, 'switchState', this.switchState);
-    if (this.lockSound) Reflect.set(json, 'lockSound', this.lockSound);
-    if (this.displayPasscode) Reflect.set(json, 'displayPasscode', this.displayPasscode);
-    if (this.autoLockTime) Reflect.set(json, 'autoLockTime', this.autoLockTime);
-    if (this.lightingTime) Reflect.set(json, 'lightingTime', this.lightingTime);
-    if (this.remoteUnlock) Reflect.set(json, 'remoteUnlock', this.remoteUnlock);
-    if (this.deviceInfo) Reflect.set(json, 'deviceInfo', this.deviceInfo);
-    const privateData: Object = {};
-    if (this.privateData.aesKey) Reflect.set(privateData, 'aesKey', this.privateData.aesKey.toString("hex"));
-    if (this.privateData.admin) Reflect.set(privateData, 'admin', this.privateData.admin);
-    if (this.privateData.adminPasscode) Reflect.set(privateData, 'adminPasscode', this.privateData.adminPasscode);
-    if (this.privateData.pwdInfo) Reflect.set(privateData, 'pwdInfo', this.privateData.pwdInfo);
-    Reflect.set(json, 'privateData', privateData);
-    if (this.operationLog) Reflect.set(json, 'operationLog', this.operationLog);
-
-    if (asObject) {
-      return json;
-    } else {
-      return JSON.stringify(json);
-    }
-  }
 }
