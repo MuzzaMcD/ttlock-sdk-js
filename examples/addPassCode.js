@@ -12,7 +12,7 @@ async function doStuff() {
   client.startScanLock();
   console.log("Scan started");
   client.on("foundLock", async (lock) => {
-    console.log(lock.toJSON());
+  //  console.log(lock.toJSON());
     console.log();
     
     if (lock.isInitialized() && lock.isPaired()) {
@@ -20,7 +20,7 @@ async function doStuff() {
       console.log("Trying to add passcode");
       console.log();
       console.log();
-      const result = await lock.addPassCode(1, '123456', '202001010000', '202212312359');
+      const result = await lock.addPassCode(1, '123456', '202001010001', '203201012359');
       await lock.disconnect();
 
       process.exit(0);
