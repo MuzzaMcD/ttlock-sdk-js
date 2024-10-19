@@ -12,14 +12,12 @@ async function doStuff() {
   client.startScanLock();
   console.log("Scan started");
   client.on("foundLock", async (lock) => {
-  //  console.log(lock.toJSON());
     console.log();
     
     if (lock.isInitialized() && lock.isPaired()) {
       await lock.connect();
-      console.log("Trying to set passage mode");
       console.log();
-      console.log();
+      console.log("Trying to GET passage mode");
       const result = await lock.getPassageMode();
       console.log(result);
       await lock.disconnect();
