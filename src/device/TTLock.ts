@@ -584,9 +584,9 @@ export class TTLock extends TTLockApi implements TTLock {
       if (await this.macro_adminLogin()) {
         let sequence = 0;
         do {
-          console.log("========= get passage mode");
+          console.log("========= get passage mode (one sequence at a time)");
           const response = await this.getPassageModeCommand(sequence);
-          console.log("========= get passage mode", response);
+          console.log(response);
           sequence = response.sequence;
           response.data.forEach((passageData) => {
             data.push(passageData);
