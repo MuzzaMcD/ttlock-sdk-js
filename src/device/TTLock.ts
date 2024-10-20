@@ -584,7 +584,7 @@ export class TTLock extends TTLockApi implements TTLock {
       if (await this.macro_adminLogin()) {
         let sequence = 0;
         do {
-          console.log("========= get passage mode (one sequence at a time)");
+          console.log("========= GET passage modes (one seq at a time)");
           const response = await this.getPassageModeCommand(sequence);
           console.log(response);
           sequence = response.sequence;
@@ -594,7 +594,7 @@ export class TTLock extends TTLockApi implements TTLock {
         } while (sequence != -1);
       }
     } catch (error) {
-      console.error("Error while getting passage mode", error);
+      console.error("Error during GET passage mode", error);
     }
 
     return data;
