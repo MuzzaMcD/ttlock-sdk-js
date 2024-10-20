@@ -3,6 +3,8 @@
 const { TTLockClient, sleep } = require('../dist');
 const settingsFile = "lockData.json";
 
+require('log-timestamp')(function() { return new Date().toLocaleTimeString()+" | " });
+
 async function doStuff() {
   let lockData = await require("./common/loadData")(settingsFile);
   let options = require("./common/options")(lockData);
@@ -12,19 +14,19 @@ async function doStuff() {
   client.startScanLock();
   console.log("Scan started");
   client.on("foundLock", async (lock) => {
-  //  console.log(lock.toJSON());
     console.log();
-    
+
     if (lock.isInitialized() && lock.isPaired()) {
       await lock.connect();
-      console.log("Trying to unlock the lock");
       console.log();
-      console.log();
+      console.log("Trying to UNLOCK the lock");
       const unlock = await lock.unlock();
+
       await lock.disconnect();
-      
+      console.log("Disconnected , now Saving Data ?");
       await require("./common/saveData")(settingsFile, client.getLockData());
 
+      console.log("###");
       process.exit(0);
     }
   });
