@@ -611,9 +611,9 @@ export class TTLock extends TTLockApi implements TTLock {
 
     try {
       if (await this.macro_adminLogin()) {
-        console.log("========= set passage mode");
+        console.log("========= SET passage mode   Start");
         await this.setPassageModeCommand(data);
-        console.log("========= set passage mode");
+        console.log("========= SET passage mode   End");
       } else {
         return false;
       }
