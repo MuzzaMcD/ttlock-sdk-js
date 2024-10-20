@@ -3,6 +3,8 @@
 const { TTLockClient, sleep, PassageModeType } = require('../dist');
 const settingsFile = "lockData.json";
 
+require('log-timestamp')(function() { return new Date().toLocaleTimeString()+" | " });
+
 async function doStuff() {
   let lockData = await require("./common/loadData")(settingsFile);
   let options = require("./common/options")(lockData);
@@ -10,27 +12,26 @@ async function doStuff() {
   const client = new TTLockClient(options);
   await client.prepareBTService();
   client.startScanLock();
-  console.log("Scan started");
+  console.log(new Date().toLocaleTimeString() + ":: Scan started");
   client.on("foundLock", async (lock) => {
-  //  console.log(lock.toJSON());
     console.log();
-    
+
     if (lock.isInitialized() && lock.isPaired()) {
       await lock.connect();
-      console.log("Trying to get lock/unlock status");
       console.log();
-      console.log();
+      console.log("Trying to get lock/unlock STATUS");
       const result = await lock.getLockStatus();
       if (result != -1) {
         if (result == 0) {
-          console.log("Lock is locked", result);
+          console.log("Lock is LOCKED     Code:", result);
         } else {
-          console.log("Lock is unlocked", result);
+          console.log("Lock is UNLOCKED   Code:", result);
         }
       } else {
         console.log("Failed to get lock status");
       }
       await lock.disconnect();
+      console.log("###");
 
       process.exit(0);
     }
